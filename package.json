@@ -1,0 +1,11 @@
+{
+    
+  "name": "kkwb",
+  "version": "1.0.0",
+  "description": "Something awesome by me",
+  "main": "app.js",
+  "author": "Ephrahim Adedamola",
+  "scripts": {
+    "start": "electron ."
+  }
+}

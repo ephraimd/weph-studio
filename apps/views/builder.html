@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html data-ng-app="builder" data-ng-controller="Controller">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../resources/_default_/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="../resources/_default_/css/theme.css" type="text/css">
+        <link rel="stylesheet" href="../resources/builder/css/electron-tabs.css" type="text/css">
+        <link rel="stylesheet" href="../resources/builder/css/mystyle.css" type="text/css">
+        <title>{{pageTitle}}</title>
+    </head>
+
+    <body style="background-color:#333;" class="p-0">
+        <nav class="navbar navbar-expand-md bg-primary navbar-dark py-0">
+            <div class="row dragger bg-primary px-2 windowDragger" title="Move App Window by dragging position icon">
+                <i class="fa d-inline fa-map-marker"></i></div>
+            <div class="container">
+                <a class="navbar-brand windowDragger" title="Move App Window by dragging position icon">
+                    <i class="fa d-inline fa-lg fa-adjust"></i>
+                    <b> {{pageTitle}}</b>
+                </a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+                    
+                    <div class="btn-toolbar mx-1">
+                        <button data-ng-click="addTab()" type="button" class="btn btn-secondary" title="Create New webpage">
+                            <i class="fa d-inline fa-file-o"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary dropdown-toggle" title="Project Files" data-toggle="dropdown">
+                            <i class="fa d-inline fa-files-o"></i> 
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right dropright" style="left:70%">
+                            <li data-ng-repeat="file in projectFiles" class="dropdown-item float-right">
+                                <span style="padding-right:6px;">{{file.filename}}</span>
+                                <button data-ng-click="addTab(file.filename)" class="btn btn-sm btn-secondary badge float-right mx-1" title="Open Web Page">
+                                    <i class="fa fa-expand"></i>
+                                </button>
+                                <button data-ng-click="deleteProjectFile(file.filename)" class="btn btn-sm btn-danger badge float-right" title="Delete Web Page">X</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn-toolbar btn-group-sm">
+                        <button data-ng-click="minimize()" type="button" class="btn btn-secondary" title="Minimize Project window">
+                            <i class="fa d-inline fa-minus-circle"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary" title="Maximize Project Window">
+                            <i class="fa d-inline fa-expand"></i>
+                        </button>
+                        <button data-ng-click="quit()" type="button" class="btn btn-danger" title="Close Project">
+                            <i class="fa d-inline fa-power-off"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!--nav ended-->
+        <div class="etabs-tabgroup">
+            <div class="etabs-tabs"></div>
+            <div class="etabs-buttons"></div>
+        </div>
+        <div class="etabs-views" style="height:102.7%"></div>
+        <h1 class="text-white">ldoksmckdscs</h1>
+        <div data-ng-include="'sub-views/builder-modals.html'"></div>
+
+        <script src="../resources/builder/js/electron-tabs.js"></script>
+
+        <script src="../resources/_default_/js/angular.min.js"></script>
+        <script src="../controllers/builderController.js"></script>
+        <script src="../resources/dashboard/js/jquery-1.9.1.js"></script>
+        <script src="../resources/dashboard/js/popper.min.js"></script>
+        <script src="../resources/dashboard/js/bootstrap.min.js"></script>
+        <script src="../resources/builder/js/script.js"></script>
+        <script>
+                                    builderC.init();
+        </script>
+    </body>
+
+</html>

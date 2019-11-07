@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html id='canvas-container'>
+    <head>
+        <link rel="stylesheet" href="../../resources/builder/css/grapes.min.css">
+        <link rel="stylesheet" href="../../resources/builder/css/kkws.css">
+        <script src="../../resources/builder/core/grapes.min.js"></script>
+        <script src="../../resources/builder/core/grapesjs-plugin-export.min.js"></script>
+    </head>
+    <body>
+        <div style="text-align: center">
+            <small style="position: relative;color:white; background: linear-gradient(to bottom, #12bbad 0%,#4f70ce 100%);padding: 3px" id="builder-status">Testing</small>
+        </div>
+        <div id="gjs"></div>
+        <script src="../../resources/dashboard/js/jquery-1.9.1.js"></script>
+        <script>
+            try {
+                $("#builder-status").hide();
+                var data = window.location.href.split('=')[1];
+                if (!data)
+                    window.location.href = 'some error page';
+                data = decodeURIComponent(data);
+                pageData = JSON.parse(data);
+                data = "";
+                //THEME = data[0];
+                ID = pageData.filename;
+                pageData.location = pageData.location + '\\';
+
+                //blocks
+                //canvas config
+                //kkws
+                pathUtil = require('path');
+                fs = require('graceful-fs');
+                sessionID = pathUtil.dirname(pageData.location)+ID; //a good session name
+                
+                $.getScript(`${pageData.pluginPath}${pageData.plugin.blocks_module[0]}`, function () {
+                    $.getScript(`${pageData.pluginPath}${pageData.plugin.blocks_module[1]}`, function () {
+                        $.getScript("../../resources/builder/core/canvas_config.js", function () {
+                            $.getScript("../../resources/builder/core/kkws.js");
+                        });
+                    });
+                });
+            } catch (err) {
+                alert(err);
+                alert(new Error().stack);
+            }
+        </script>
+        <!-- Select Theme: Theme dependent customization -->
+
+        <!-- Scripts that does the merging of our theme and setting up of editor -->
+
+    </body>
+</html>

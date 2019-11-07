@@ -1,0 +1,56 @@
+<div>
+    <!--   Modals   -->
+    <!--   New Plugin Dialog   -->
+    <div id='modal-add-plugin' class="modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" >
+                    <h5 class="modal-title">Add new Plugin</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>X</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Plugin File Location</label>
+                        <input type="text" data-ng-click='openFolderDialog("plugin")' data-ng-model='dialogPluginPath' class="form-control" placeholder="Select Plugin file (*.kplugin)"> 
+                        <small class="form-text {{pluginModalStatusColor}}">{{pluginModalStatus}}</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-ng-click='doAddPlugin()' class="btn btn-primary">Add!</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--   New Projects Dialog   -->
+    <div id='modal-create-project' class="modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" >
+                    <h5 class="modal-title">Create New {{curProject.plugin.name}} Project</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>X</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Project Name</label>
+                        <input type="text" class="form-control" data-ng-model='curProject.name' placeholder="Enter Project Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Project Location</label>
+                        <input type="text" data-ng-click='openFolderDialog("project")' data-ng-model='curProject.location' class="form-control" placeholder="Select Project Location"> 
+                        <small class="form-text text-danger text-bold">{{projectModalStatus}}</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-ng-click='doCreateProject()' class="btn btn-primary">Proceed!</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

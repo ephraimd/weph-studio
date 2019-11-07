@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html data-ng-app="dashboard" data-ng-controller="Controller">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../resources/_default_/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="../resources/_default_/css/theme.css" type="text/css">
+        <link rel="stylesheet" href="../resources/dashboard/css/mystyle.css" type="text/css">
+        <title>{{pageTitle}}</title>
+    </head>
+
+    <body style="background-color:#333;" class="p-0">
+        <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+            <div class="row dragger bg-primary px-2 windowDragger" title="Move App Window by dragging position icon">
+                <!--<i class="fa d-inline fa-2x fa-map-marker"></i>--></div>
+            <div class="container">
+                <a class="navbar-brand windowDragger" title="Move App Window by dragging position icon">
+                    <i class="fa d-inline fa-lg fa-adjust"></i>
+                    <b> KKWS Web Builder</b>
+                </a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+                    <!--<div class="btn-toolbar mx-3">
+                        <div class="btn-group">
+                            <button data-ng-click="test()" type="button" class="btn btn-danger" title="Create New Project">
+                                <i class="fa d-inline fa-folder"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" title="Create New Web page">
+                                <i class="fa d-inline fa-file-o"></i>
+                            </button>
+                        </div>
+                    </div>-->
+                    <a class="btn navbar-btn ml-2 text-white btn-success" title="Enjoying the free app? Get the pro version to get even more productivity and beautiful websites!">
+                        <i class="fa d-inline fa-lg fa-star"></i> Get Pro!</a>
+                    <div class="btn-toolbar btn-group-sm">
+                        <button type="button" class="btn btn-secondary mx-1" title="Visit KKWS Website for news, forums and more resources">
+                            <i class="fa d-inline fa-question-circle"></i>
+                        </button>
+                        <button data-ng-click="minimize()" type="button" class="btn btn-secondary" title="Minimize KKWS Builder">
+                            <i class="fa d-inline fa-minus-circle"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary" title="Maximize KKWS Builder">
+                            <i class="fa d-inline fa-expand"></i>
+                        </button>
+                        <button data-ng-click="quit()" type="button" class="btn btn-danger" title="Quit KKWS Builder">
+                            <i class="fa d-inline fa-power-off"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="p-0">
+            <div class="row">
+                <div id="sidebar" class="col-md-3">
+                    <div style="margin-top: 5px;" class="bg-primary p-1">
+                        <h3>
+                            Recent Projects 
+                            <small>
+                                <button data-ng-click="clearRecentProjects()" class="btn btn-sm float-right"><i class="fa fa-trash-o"></i></button>
+                            </small>
+                        </h3>
+                    </div>
+                    <ul class="list-group" style="border-radius:0px;max-height: 550px;overflow-y: auto">
+                        <li data-ng-repeat="project in rcProjects" class="list-group-item list-group-item-action">
+                            {{project.name}} - {{project.plugin.name}}
+                            <button data-ng-click="openRecentProject(project.name)" class="btn btn-sm btn-secondary badge float-right mx-1" title="Open Project">
+                                <i class="fa fa-expand"></i>
+                            </button>
+                            <button data-ng-click="deleteRecentProject(project.name)" class="btn btn-sm btn-danger badge float-right" title="Delete Project">X</button>
+                        </li>
+                    </ul>
+                </div>
+                <div id="content" class="col-md-8">
+                    <div id="static-plugin-listing" class="py-2">
+                        <!--<div class="page-header py-2 text-center">
+                            <h1>Static Builders</h1>
+                        </div>-->
+                        <div class="container p-0">
+                            <div class="row">
+                                <div data-ng-repeat="plugin in staticPlugins" class="col-md-4 card p-0 mx-1">
+                                    <div class="card-header ">
+                                        <h4 class="card-title">{{plugin.title}}</h4>
+                                    </div>
+                                    <div class="card-body"> {{plugin.description}} </div>
+                                    <small class="text-muted px-1">{{plugin.author}} | {{plugin.version}}</small>
+                                    <div class="card-footer ">
+                                        <button data-ng-click="createProject(plugin)" class="btn btn-{{plugin.theme_color}}">Create!</button>
+                                        <button data-ng-click="deletePlugin(plugin.name)" class="btn btn-sm btn-danger" title="Delete plugin {{plugin.name}}">
+                                            <i class="fa fa-trash-o"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- --
+                    <div id="kfusion-plugin-listing">
+                        <div class="page-header py-2 text-center">
+                            <h1>kfusion Builders</h1>
+                        </div>
+                        <div class="container p-0">
+                            <div class="row">
+                                <div class="col-md-3 card p-0">
+                                    <div class="card-header ">
+                                        <h4 class="card-title">{{plugin.title}}</h4>
+                                    </div>
+                                    <div class="card-body"> {{plugin.description}} </div>
+                                    <div class="card-footer ">
+                                        <button class="btn btn-{{plugin.color}}" onclick="openWindow()">Create!</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- -->
+                </div>
+            </div>
+        </div>
+        <div id="floater" style="cursor:pointer;position: fixed;top: 80px;right:10px;background-color: #4f70ce;padding: 9px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">
+            <!-- <a id="switch-plugin-list" class="text-white mx-2" title="Switch Plugin listing category">
+                <i class="fa fa-2x fa-sort"></i>
+            </a>-->
+            <a data-ng-click="openPluginDialog()" id="addPlugin" class="text-white" title="Add new Plugin">
+                <i class="fa fa-2x fa-briefcase"></i>
+            </a>
+        </div>
+        <div data-ng-include="'sub-views/dashboard-modals.html'"></div>
+        
+        <script src="../resources/_default_/js/angular.min.js"></script>
+        <script src="../controllers/dashboardController.js"></script>
+        <script src="../resources/dashboard/js/jquery-1.9.1.js"></script>
+        <script src="../resources/dashboard/js/popper.min.js"></script>
+        <script src="../resources/dashboard/js/bootstrap.min.js"></script>
+        <script>
+            dashboardC.init();
+        </script>
+    </body>
+
+</html>

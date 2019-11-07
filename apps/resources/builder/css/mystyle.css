@@ -1,0 +1,18 @@
+
+/* 
+    Created on : Aug 17, 2018, 3:02:57 AM
+    Author     : ADEDAMOLA
+*/
+
+body{
+    
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.windowDragger{
+    -webkit-app-region:drag;
+    -webkit-user-select: none;
+}
+.text-bold{
+    font-weight: bold;
+}

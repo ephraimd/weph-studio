@@ -1,0 +1,12 @@
+
+/* 
+    Created on : Aug 17, 2018, 3:02:57 AM
+    Author     : ADEDAMOLA
+*/
+
+body{
+    -webkit-user-select: none;
+}
+.windowDragger{
+    -webkit-app-region:drag;
+}
